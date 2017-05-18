@@ -10,19 +10,14 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdvertController extends Controller
 {
-  // On modifie viewAction, car elle existe déjà
-  public function viewAction($id)
+  public function viewAction($id, Request $request)
   {
-    // On crée la réponse sans lui donner de contenu pour le moment
-    $response = new Response();
+    // On récupère notre paramètre tag
+   $tag = $request->query->get('tag');
 
-    // On définit le contenu
-    $response->setContent("Ceci est une page d'erreur 404");
-
-    // On définit le code HTTP à « Not Found » (erreur 404)
-    $response->setStatusCode(Response::HTTP_NOT_FOUND);
-
-    // On retourne la réponse
-    return $response;
+   return $this->render('OCPlatformBundle:Advert:view.html.twig', array(
+     'id'  => $id,
+     'tag' => $tag,
+   ));
   }
 }
