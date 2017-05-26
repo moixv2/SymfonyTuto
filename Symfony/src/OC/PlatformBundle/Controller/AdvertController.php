@@ -21,7 +21,7 @@ class AdvertController extends Controller{
 
     );
 
-    return $this -> render('OCPlatformBundle:Advert:menu.htlm.twig', array(
+    return $this -> render('OCPlatformBundle:Advert:index.htlm.twig', array(
       'listeAdverts' => $listeAdverts
     ));
   }
