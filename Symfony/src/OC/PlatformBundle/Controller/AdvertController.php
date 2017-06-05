@@ -6,23 +6,20 @@ namespace OC\PlatformBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-//
-
-class AdvertController extends Controller{
-
-  public function menuAction()
+class AdvertController extends Controller
+{
+  public function addAction(Request $request)
   {
-    $listeAdverts = array(
-      array('id' => 2, 'title' => 'Recherche dev Symfony'),
-      array('id' => 5, 'title' => 'mission webmaster'),
-      array('id' => 9, 'title' => 'offre de stage webdesigner')
+    // On récupère le service
+    $antispam = $this->container->get('oc_platform.antispam');
 
-    );
+    // Je pars du principe que $text contient le texte d'un message quelconque
+    $text = '...';
+    if ($antispam->isSpam($text)) {
+      throw new \Exception('Votre message a été détecté comme spam !');
+    }
 
-    return $this -> render('OCPlatformBundle:Advert:index.htlm.twig', array(
-      'listeAdverts' => $listeAdverts
-    ));
+    // Ici le message n'est pas un spam
   }
 }
